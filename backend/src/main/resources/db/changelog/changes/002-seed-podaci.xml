@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="011-seed-administrator" author="njtprobni">
+        <insert tableName="administrator">
+            <column name="id" valueNumeric="1"/>
+            <column name="ime" value="Marija"/>
+            <column name="prezime" value="Jovanović"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="admin123"/>
+            <column name="email" value="admin@njtprobni.rs"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="012-seed-kandidat-demo" author="njtprobni">
+        <insert tableName="kandidat">
+            <column name="id" valueNumeric="1"/>
+            <column name="ime" value="Petar"/>
+            <column name="prezime" value="Petrović"/>
+            <column name="telefon" value="0641234567"/>
+            <column name="username" value="petar@example.com"/>
+            <column name="password" value="kandidat123"/>
+            <column name="email" value="petar@example.com"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="013-seed-vrsta-ispita" author="njtprobni">
+        <insert tableName="vrsta_ispita">
+            <column name="id" valueNumeric="1"/>
+            <column name="naziv" value="Matematika"/>
+        </insert>
+        <insert tableName="vrsta_ispita">
+            <column name="id" valueNumeric="2"/>
+            <column name="naziv" value="Test opšte informisanosti"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="014-seed-lokacija" author="njtprobni">
+        <insert tableName="lokacija">
+            <column name="id" valueNumeric="1"/>
+            <column name="naziv" value="Beogradski sajam - Hala 1"/>
+            <column name="adresa" value="Bulevar Vojvode Mišića 14, Beograd"/>
+        </insert>
+        <insert tableName="lokacija">
+            <column name="id" valueNumeric="2"/>
+            <column name="naziv" value="Beogradski sajam - Hala 2"/>
+            <column name="adresa" value="Bulevar Vojvode Mišića 14, Beograd"/>
+        </insert>
+        <insert tableName="lokacija">
+            <column name="id" valueNumeric="3"/>
+            <column name="naziv" value="Beogradski sajam - Hala 3"/>
+            <column name="adresa" value="Bulevar Vojvode Mišića 14, Beograd"/>
+        </insert>
+        <insert tableName="lokacija">
+            <column name="id" valueNumeric="4"/>
+            <column name="naziv" value="Beogradski sajam - Hala 4"/>
+            <column name="adresa" value="Bulevar Vojvode Mišića 14, Beograd"/>
+        </insert>
+        <insert tableName="lokacija">
+            <column name="id" valueNumeric="5"/>
+            <column name="naziv" value="FON - Amfiteatar 1"/>
+            <column name="adresa" value="Jove Ilića 154, Beograd"/>
+        </insert>
+        <insert tableName="lokacija">
+            <column name="id" valueNumeric="6"/>
+            <column name="naziv" value="FON - Amfiteatar 2"/>
+            <column name="adresa" value="Jove Ilića 154, Beograd"/>
+        </insert>
+        <insert tableName="lokacija">
+            <column name="id" valueNumeric="7"/>
+            <column name="naziv" value="FON - Amfiteatar 3"/>
+            <column name="adresa" value="Jove Ilića 154, Beograd"/>
+        </insert>
+        <insert tableName="lokacija">
+            <column name="id" valueNumeric="8"/>
+            <column name="naziv" value="FON - Amfiteatar 4"/>
+            <column name="adresa" value="Jove Ilića 154, Beograd"/>
+        </insert>
+        <insert tableName="lokacija">
+            <column name="id" valueNumeric="9"/>
+            <column name="naziv" value="FON - Amfiteatar 5"/>
+            <column name="adresa" value="Jove Ilića 154, Beograd"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="015-seed-cenovnik" author="njtprobni">
+        <insert tableName="cenovnik">
+            <column name="id" valueNumeric="1"/>
+            <column name="naziv" value="Standardni paket - Matematika"/>
+            <column name="cena" valueNumeric="6000.00"/>
+            <column name="vazi_od" valueDate="2026-01-01"/>
+            <column name="opis" value="Cenovnik za probni test iz matematike."/>
+        </insert>
+        <insert tableName="cenovnik">
+            <column name="id" valueNumeric="2"/>
+            <column name="naziv" value="Standardni paket - Test opšte informisanosti"/>
+            <column name="cena" valueNumeric="5000.00"/>
+            <column name="vazi_od" valueDate="2026-01-01"/>
+            <column name="opis" value="Cenovnik za probni test opšte informisanosti."/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="016-seed-vrsta-ispita-cenovnik" author="njtprobni">
+        <insert tableName="vrsta_ispita_cenovnik">
+            <column name="id" valueNumeric="1"/>
+            <column name="aktivna" valueBoolean="true"/>
+            <column name="vrsta_ispita_id" valueNumeric="1"/>
+            <column name="cenovnik_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="vrsta_ispita_cenovnik">
+            <column name="id" valueNumeric="2"/>
+            <column name="aktivna" valueBoolean="true"/>
+            <column name="vrsta_ispita_id" valueNumeric="2"/>
+            <column name="cenovnik_id" valueNumeric="2"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="017-seed-termin-matematika" author="njtprobni">
+        <insert tableName="termin">
+            <column name="id" valueNumeric="1"/>
+            <column name="datum" valueDate="2026-08-08"/>
+            <column name="vreme_pocetka" value="10:00"/>
+            <column name="dostupan" valueBoolean="true"/>
+            <column name="vrsta_ispita_id" valueNumeric="1"/>
+            <column name="lokacija_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="termin">
+            <column name="id" valueNumeric="2"/>
+            <column name="datum" valueDate="2026-08-08"/>
+            <column name="vreme_pocetka" value="14:00"/>
+            <column name="dostupan" valueBoolean="true"/>
+            <column name="vrsta_ispita_id" valueNumeric="1"/>
+            <column name="lokacija_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="termin">
+            <column name="id" valueNumeric="3"/>
+            <column name="datum" valueDate="2026-08-15"/>
+            <column name="vreme_pocetka" value="10:00"/>
+            <column name="dostupan" valueBoolean="true"/>
+            <column name="vrsta_ispita_id" valueNumeric="1"/>
+            <column name="lokacija_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="termin">
+            <column name="id" valueNumeric="4"/>
+            <column name="datum" valueDate="2026-08-15"/>
+            <column name="vreme_pocetka" value="14:00"/>
+            <column name="dostupan" valueBoolean="true"/>
+            <column name="vrsta_ispita_id" valueNumeric="1"/>
+            <column name="lokacija_id" valueNumeric="4"/>
+        </insert>
+        <insert tableName="termin">
+            <column name="id" valueNumeric="5"/>
+            <column name="datum" valueDate="2026-08-22"/>
+            <column name="vreme_pocetka" value="09:00"/>
+            <column name="dostupan" valueBoolean="true"/>
+            <column name="vrsta_ispita_id" valueNumeric="1"/>
+            <column name="lokacija_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="018-seed-termin-opsta-informisanost" author="njtprobni">
+        <insert tableName="termin">
+            <column name="id" valueNumeric="6"/>
+            <column name="datum" valueDate="2026-08-09"/>
+            <column name="vreme_pocetka" value="10:00"/>
+            <column name="dostupan" valueBoolean="true"/>
+            <column name="vrsta_ispita_id" valueNumeric="2"/>
+            <column name="lokacija_id" valueNumeric="5"/>
+        </insert>
+        <insert tableName="termin">
+            <column name="id" valueNumeric="7"/>
+            <column name="datum" valueDate="2026-08-09"/>
+            <column name="vreme_pocetka" value="13:00"/>
+            <column name="dostupan" valueBoolean="true"/>
+            <column name="vrsta_ispita_id" valueNumeric="2"/>
+            <column name="lokacija_id" valueNumeric="6"/>
+        </insert>
+        <insert tableName="termin">
+            <column name="id" valueNumeric="8"/>
+            <column name="datum" valueDate="2026-08-16"/>
+            <column name="vreme_pocetka" value="10:00"/>
+            <column name="dostupan" valueBoolean="true"/>
+            <column name="vrsta_ispita_id" valueNumeric="2"/>
+            <column name="lokacija_id" valueNumeric="7"/>
+        </insert>
+        <insert tableName="termin">
+            <column name="id" valueNumeric="9"/>
+            <column name="datum" valueDate="2026-08-16"/>
+            <column name="vreme_pocetka" value="13:00"/>
+            <column name="dostupan" valueBoolean="true"/>
+            <column name="vrsta_ispita_id" valueNumeric="2"/>
+            <column name="lokacija_id" valueNumeric="8"/>
+        </insert>
+        <insert tableName="termin">
+            <column name="id" valueNumeric="10"/>
+            <column name="datum" valueDate="2026-08-23"/>
+            <column name="vreme_pocetka" value="11:00"/>
+            <column name="dostupan" valueBoolean="true"/>
+            <column name="vrsta_ispita_id" valueNumeric="2"/>
+            <column name="lokacija_id" valueNumeric="9"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="019-seed-kandidati-dodatni" author="njtprobni">
+        <insert tableName="kandidat">
+            <column name="id" valueNumeric="2"/>
+            <column name="ime" value="Ana"/>
+            <column name="prezime" value="Anić"/>
+            <column name="telefon" value="0631112233"/>
+            <column name="username" value="ana@example.com"/>
+            <column name="password" value="ana12345"/>
+            <column name="email" value="ana@example.com"/>
+        </insert>
+        <insert tableName="kandidat">
+            <column name="id" valueNumeric="3"/>
+            <column name="ime" value="Marko"/>
+            <column name="prezime" value="Marković"/>
+            <column name="telefon" value="0659876543"/>
+            <column name="username" value="marko@example.com"/>
+            <column name="password" value="marko12345"/>
+            <column name="email" value="marko@example.com"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="020-seed-prijave" author="njtprobni">
+        <insert tableName="prijava">
+            <column name="id" valueNumeric="1"/>
+            <column name="datum_prijave" valueDate="2026-07-01"/>
+            <column name="cena" valueNumeric="6000.00"/>
+            <column name="status" value="ODOBRENA"/>
+            <column name="napomena" value="[NACIN_PLACANJA:JEDNOKRATNO]"/>
+            <column name="kandidat_id" valueNumeric="1"/>
+            <column name="administrator_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="prijava">
+            <column name="id" valueNumeric="2"/>
+            <column name="datum_prijave" valueDate="2026-07-03"/>
+            <column name="cena" valueNumeric="5000.00"/>
+            <column name="status" value="NA_CEKANJU"/>
+            <column name="napomena" value="[NACIN_PLACANJA:RATE]"/>
+            <column name="kandidat_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="prijava">
+            <column name="id" valueNumeric="3"/>
+            <column name="datum_prijave" valueDate="2026-07-05"/>
+            <column name="cena" valueNumeric="11000.00"/>
+            <column name="status" value="ODBIJENA"/>
+            <column name="napomena" value="[NACIN_PLACANJA:RATE]&#10;Uplata nije evidentirana u predviđenom roku."/>
+            <column name="kandidat_id" valueNumeric="3"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="021-seed-prijava-termin" author="njtprobni">
+        <insert tableName="prijava_termin">
+            <column name="prijava_id" valueNumeric="1"/>
+            <column name="termin_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="prijava_termin">
+            <column name="prijava_id" valueNumeric="2"/>
+            <column name="termin_id" valueNumeric="6"/>
+        </insert>
+        <insert tableName="prijava_termin">
+            <column name="prijava_id" valueNumeric="3"/>
+            <column name="termin_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="prijava_termin">
+            <column name="prijava_id" valueNumeric="3"/>
+            <column name="termin_id" valueNumeric="8"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="022-seed-uplate" author="njtprobni">
+        <insert tableName="uplata">
+            <column name="id" valueNumeric="1"/>
+            <column name="iznos" valueNumeric="6000.00"/>
+            <column name="datum_uplate" valueDate="2026-07-02"/>
+            <column name="prijava_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="uplata">
+            <column name="id" valueNumeric="2"/>
+            <column name="iznos" valueNumeric="1000.00"/>
+            <column name="datum_uplate" valueDate="2026-07-04"/>
+            <column name="prijava_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="uplata">
+            <column name="id" valueNumeric="3"/>
+            <column name="iznos" valueNumeric="1000.00"/>
+            <column name="datum_uplate" valueDate="2026-07-10"/>
+            <column name="prijava_id" valueNumeric="2"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

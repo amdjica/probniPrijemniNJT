@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001-create-kandidat" author="njtprobni">
+        <createTable tableName="kandidat">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ime" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="prezime" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="telefon" type="VARCHAR(50)"/>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="002-create-administrator" author="njtprobni">
+        <createTable tableName="administrator">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ime" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="prezime" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="003-create-lokacija" author="njtprobni">
+        <createTable tableName="lokacija">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="naziv" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="adresa" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="004-create-vrsta-ispita" author="njtprobni">
+        <createTable tableName="vrsta_ispita">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="naziv" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="005-create-cenovnik" author="njtprobni">
+        <createTable tableName="cenovnik">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="naziv" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cena" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vazi_od" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vazi_do" type="DATE"/>
+            <column name="opis" type="VARCHAR(1000)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="006-create-vrsta-ispita-cenovnik" author="njtprobni">
+        <createTable tableName="vrsta_ispita_cenovnik">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="aktivna" type="BOOLEAN" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vrsta_ispita_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_vic_vrsta_ispita" references="vrsta_ispita(id)"/>
+            </column>
+            <column name="cenovnik_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_vic_cenovnik" references="cenovnik(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="007-create-termin" author="njtprobni">
+        <createTable tableName="termin">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="datum" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vreme_pocetka" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="napomena" type="VARCHAR(500)"/>
+            <column name="dostupan" type="BOOLEAN" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vrsta_ispita_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_termin_vrsta_ispita" references="vrsta_ispita(id)"/>
+            </column>
+            <column name="lokacija_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_termin_lokacija" references="lokacija(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="008-create-prijava" author="njtprobni">
+        <createTable tableName="prijava">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="datum_prijave" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cena" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="napomena" type="VARCHAR(500)"/>
+            <column name="kandidat_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_prijava_kandidat" references="kandidat(id)"/>
+            </column>
+            <column name="administrator_id" type="BIGINT">
+                <constraints nullable="true" foreignKeyName="fk_prijava_administrator" references="administrator(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="009-create-uplata" author="njtprobni">
+        <createTable tableName="uplata">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="iznos" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datum_uplate" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="prijava_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_uplata_prijava" references="prijava(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="010-create-prijava-termin" author="njtprobni">
+        <createTable tableName="prijava_termin">
+            <column name="prijava_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_pt_prijava" references="prijava(id)"/>
+            </column>
+            <column name="termin_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_pt_termin" references="termin(id)"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="prijava_termin" columnNames="prijava_id, termin_id" constraintName="pk_prijava_termin"/>
+    </changeSet>
+
+</databaseChangeLog>
